@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Withdraw | TRADEON</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/trade.css"></head>
+<body>
+<header class="tbar">
+ <a class="tbrand" href="/" aria-label="TRADEON home"><span class="mark">T</span><strong>TRADEON</strong></a>
+ <button class="tburger" id="tburger" aria-label="Menu">☰</button>
+ <nav class="tlinks" id="tlinks"><a href="/dashboard.html">Dashboard</a><a href="/deposit.html">Deposit</a><a href="/withdraw.html" class="on">Withdraw</a><a href="/wallet.html">History</a></nav>
+ <div class="tright"><a class="chip" href="/wallet.html"><span class="av">$</span><b id="bal">$0.00</b></a><a class="btn primary sm" href="/dashboard.html">Trade</a></div>
+</header>
+<main class="wrap" style="padding:28px 20px 60px">
+ <div class="panel" id="wallet"><h3>Request a withdrawal</h3>
+  <form id="wdForm" style="max-width:520px;margin-top:14px">
+   <p class="sub">Minimum withdrawal: $5</p>
+   <label>Amount ($)</label><input name="amount" type="number" min="5" step="0.01" required>
+   <label>Method</label><select name="method"><option>M-Pesa</option><option>Bank</option><option>Crypto</option></select>
+   <label>Send to (phone or account)</label><input name="reference" required>
+   <button class="btn primary" style="width:100%;margin-top:14px" type="submit">Request withdrawal</button>
+  </form>
+  <div class="msg" id="wmsg" role="alert"></div>
+ </div>
+ <div class="panel" style="margin-top:20px"><h3 style="margin-bottom:10px">Recent transactions</h3><div class="tbl"><table><thead><tr><th>Type</th><th>Amount</th><th>Method</th><th>Status</th><th>Date</th></tr></thead><tbody id="txs"></tbody></table></div></div>
+</main>
+<footer><div class="wrap"><small>&copy; <span id="yr"></span> TRADEON. All rights reserved. Trading binary options is high risk and you can lose your entire stake.</small></div></footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
+<script src="/app.js"></script>
+<script>document.getElementById('tburger').onclick=()=>document.getElementById('tlinks').classList.toggle('open');api('/api/me').catch(()=>location.href='/login.html');</script>
+</body></html>

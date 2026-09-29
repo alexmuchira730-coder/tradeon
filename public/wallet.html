@@ -1,0 +1,23 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Wallet | TRADEON</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/trade.css"></head>
+<body>
+<header class="tbar">
+ <a class="tbrand" href="/" aria-label="TRADEON home"><span class="mark">T</span><strong>TRADEON</strong></a>
+ <button class="tburger" id="tburger" aria-label="Menu">☰</button>
+ <nav class="tlinks" id="tlinks"><a href="/dashboard.html">Dashboard</a><a href="/deposit.html">Deposit</a><a href="/withdraw.html">Withdraw</a><a href="/wallet.html" class="on">History</a></nav>
+ <div class="tright"><a class="chip" href="/wallet.html"><span class="av">$</span><b id="bal">$0.00</b></a><a class="btn primary sm" href="/dashboard.html">Trade</a></div>
+</header>
+<main class="wrap" style="padding:28px 20px 60px">
+ <div class="panel" id="wallet"><h3>Transaction history</h3><div class="tbl" style="margin-top:10px"><table><thead><tr><th>Type</th><th>Amount</th><th>Method</th><th>Status</th><th>Date</th></tr></thead><tbody id="txs"></tbody></table></div></div>
+ <div class="panel" style="margin-top:20px"><h3 style="margin-bottom:10px">Trade history</h3><div class="tbl"><table><thead><tr><th>Market</th><th>Side</th><th>Stake</th><th>Entry</th><th>Exit</th><th>Result</th></tr></thead><tbody id="hist"></tbody></table></div></div>
+</main>
+<footer><div class="wrap"><small>&copy; <span id="yr"></span> TRADEON. All rights reserved. Trading binary options is high risk and you can lose your entire stake.</small></div></footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
+<script src="/app.js"></script>
+<script>
+document.getElementById('tburger').onclick=()=>document.getElementById('tlinks').classList.toggle('open');
+api('/api/me').catch(()=>location.href='/login.html');
+(async()=>{try{const t=await api('/api/trades');document.getElementById('hist').innerHTML=t.map(x=>{const pl=x.status==='won'?x.payout-x.stake:x.status==='lost'?-x.stake:0;
+return `<tr><td>${esc(x.asset)}</td><td>${esc(x.direction.toUpperCase())}</td><td>$${x.stake.toFixed(2)}</td><td>${esc(x.entry)}</td><td>${esc(x.exit_price??'—')}</td><td><span class="tag ${esc(x.status)}">${esc(x.status)}</span> ${x.status==='open'?'':(pl>=0?'+':'-')+'$'+Math.abs(pl).toFixed(2)}</td></tr>`}).join('')||'<tr><td colspan="6">No trades yet.</td></tr>'}catch{}})();
+</script>
+</body></html>

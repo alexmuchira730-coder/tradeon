@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><title>Admin | TRADEON</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css"></head><body>
+<header><div class="wrap"><nav><a class="logo" href="/">TRADEON Admin</a><button class="burger" aria-label="Menu">☰</button><div class="links"><a href="/dashboard.html">Trading room</a><a href="#" id="logout" class="btn">Log out</a></div></nav></div></header>
+<main class="wrap" style="padding:28px 20px 60px">
+ <div class="grid" id="stats" style="margin-bottom:20px"></div>
+ <div class="panel"><h3 style="margin-bottom:10px">Deposits and withdrawals</h3><div class="tbl"><table><thead><tr><th>ID</th><th>User</th><th>Type</th><th>Amount</th><th>Method</th><th>Reference</th><th>Status</th><th>Action</th></tr></thead><tbody id="tx"></tbody></table></div></div>
+ <div class="panel" style="margin-top:20px"><h3 style="margin-bottom:10px">Users</h3><div class="tbl"><table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Balance</th><th>Admin</th><th>Joined</th></tr></thead><tbody id="users"></tbody></table></div></div>
+ <div class="panel" style="margin-top:20px"><h3 style="margin-bottom:10px">Latest trades</h3><div class="tbl"><table><thead><tr><th>ID</th><th>User</th><th>Asset</th><th>Side</th><th>Stake</th><th>Entry</th><th>Exit</th><th>Status</th></tr></thead><tbody id="trades"></tbody></table></div></div>
+ <div class="msg" id="amsg"></div>
+</main>
+<footer><div class="wrap"><small>&copy; <span id="yr"></span> TRADEON. All rights reserved.</small></div></footer>
+<script>document.getElementById('yr').textContent=new Date().getFullYear()</script><script src="/app.js"></script>
+<script>
+const $=id=>document.getElementById(id), m=n=>'$'+Number(n).toFixed(2);
+async function load(){
+  try{
+    const [s,tx,u,t]=await Promise.all([api('/api/admin/stats'),api('/api/admin/transactions'),api('/api/admin/users'),api('/api/admin/trades')]);
+    $('stats').innerHTML=[['Users',s.users],['Total user balances',m(s.balances)],['Pending deposits',s.pendingDeposits],['Pending withdrawals',s.pendingWithdrawals]].map(([k,v])=>`<div class="card"><p>${k}</p><h3 style="font-size:1.6rem">${v}</h3></div>`).join('');
+    $('tx').innerHTML=tx.map(x=>`<tr><td>${x.id}</td><td>${esc(x.email)}</td><td>${esc(x.type)}</td><td>${m(x.amount)}</td><td>${esc(x.method)}</td><td>${esc(x.reference)}</td>
+      <td><span class="tag ${x.status==='approved'?'won':x.status==='rejected'?'lost':'open'}">${esc(x.status)}</span></td>
+      <td>${x.status==='review'||(x.status==='pending'&&x.method!=='M-Pesa')?`<button class="btn call" style="padding:5px 10px" onclick="act(${x.id},'approve')">Approve</button> <button class="btn put" style="padding:5px 10px" onclick="act(${x.id},'reject')">Reject</button>`:''}</td></tr>`).join('')||'<tr><td colspan="8">Nothing yet.</td></tr>';
+    $('users').innerHTML=u.map(x=>`<tr><td>${x.id}</td><td>${esc(x.name)}</td><td>${esc(x.email)}</td><td>${m(x.balance)}</td><td>${x.is_admin?'Yes':''}</td><td>${esc(x.created_at)}</td></tr>`).join('');
+    $('trades').innerHTML=t.map(x=>`<tr><td>${x.id}</td><td>${esc(x.email)}</td><td>${esc(x.asset)}</td><td>${esc(x.direction)}</td><td>${m(x.stake)}</td><td>${x.entry}</td><td>${x.exit_price??'—'}</td><td><span class="tag ${esc(x.status)}">${esc(x.status)}</span></td></tr>`).join('');
+  }catch(e){ location.href = e.status===401 ? '/login.html' : '/dashboard.html'; }
+}
+async function act(id,a){ try{ await api(`/api/admin/transactions/${id}/${a}`,'POST'); load(); }catch(e){ $('amsg').className='msg err'; $('amsg').textContent=e.message; } }
+$('logout').onclick=async e=>{e.preventDefault();await api('/api/logout','POST');location.href='/';};
+load(); setInterval(load,10000);
+</script></body></html>

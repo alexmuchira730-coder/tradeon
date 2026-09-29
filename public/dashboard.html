@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title> TRADEON</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/trade.css"></head>
+<body class="trade">
+<header class="tbar">
+ <a class="tbrand" href="/" aria-label="TRADEON home"><span class="mark">T</span><strong>TRADEON</strong></a>
+ <button class="tburger" id="tburger" aria-label="Menu">☰</button>
+ <nav class="tlinks" id="tlinks"><a href="/dashboard.html" class="on">Dashboard</a><a href="/deposit.html">Deposit</a><a href="/withdraw.html">Withdraw</a><a href="/wallet.html">History</a></nav>
+ <div class="tright">
+  <a class="chip" href="/wallet.html" title="Wallet"><span class="av">$</span><b id="bal">$0.00</b></a>
+  <a class="btn primary sm" href="/deposit.html">Deposit</a>
+  <div class="umenu"><button class="ubtn" id="uBtn" aria-label="Account">A</button>
+   <div class="drop" id="uMenu" hidden><p id="uname"></p><a href="/">Home</a><a href="/admin.html" id="adm" hidden>Admin</a><a href="#" id="lo">Log out</a></div></div>
+ </div>
+</header>
+
+<main class="tmain">
+ <aside class="lp">
+  <div class="tabs"><button class="on" data-tab="open">Open (<span id="cOpen">0</span>)</button><button data-tab="closed">Closed (<span id="cClosed">0</span>)</button><button data-tab="tx">Transactions</button></div>
+  <div class="list" id="list"></div>
+  <div class="foot" id="foot">0 open positions</div>
+ </aside>
+
+ <section class="cp">
+  <div class="cw">
+   <canvas id="chart"></canvas>
+   <div class="mcard">
+    <button class="mbtn" id="mBtn"><span>📊</span><span><b id="mName">Volatility 10 (1s) Index</b><small><span id="mPx">—</span> <span id="mChg"></span></small></span><span>⌄</span></button>
+    <div class="mlist" id="mList" hidden></div>
+   </div>
+  </div>
+  <div class="dgbar" id="digits" aria-label="Last digit statistics"></div>
+ </section>
+
+ <aside class="rp">
+  <section>
+   <div class="seg" id="modeSeg"><button data-mode="auto" class="on">Auto</button><button data-mode="manual">Manual</button></div>
+   <div id="autoBox">
+    <div class="frow"><label for="tp">Target Profit</label><div class="inp">$<input id="tp" type="number" min="0" value="200"></div></div>
+    <div class="frow"><label for="tl">Target Loss</label><div class="inp">$<input id="tl" type="number" min="0" value="999"></div></div>
+    <div class="frow"><label for="lm">Loss Multiple</label><div class="inp">x<input id="lm" type="number" min="1" step="0.1" value="2"></div></div>
+   </div>
+  </section>
+  <section>
+   <div class="seg" id="stakeSeg"><button data-sm="stake" class="on">Stake</button><button data-sm="payout">Payout</button></div>
+   <div class="stk" style="margin-top:14px"><button id="minus" aria-label="Decrease">−</button><div class="inp"><input id="amt" type="number" min="1" step="0.5" value="1"><span>USD</span></div><button id="plus" aria-label="Increase">+</button></div>
+  </section>
+  <section>
+   <button class="side ev" id="evenBtn"><span class="top">▦ Even <span class="bar"><i id="evBar"></i></span><span class="pc" id="evPc">95.22%</span></span></button>
+   <div class="pay"><span>Payout</span><b id="payoutVal">1.95 USD</b></div>
+   <button class="side od" id="oddBtn"><span class="top">△ Odd <span class="bar"><i id="odBar"></i></span><span class="pc" id="odPc">95.22%</span></span></button>
+   <button class="stop" id="stopBtn" hidden>Stop auto trading</button>
+   <div class="msg" id="dmsg" role="alert"></div>
+  </section>
+ </aside>
+</main>
+<div class="cr">&copy; <span id="yr"></span> TRADEON. All rights reserved. Trading binary options is high risk and you can lose your entire stake. <a href="/#risk">Risk warning</a></div>
+<script>document.getElementById('yr').textContent=new Date().getFullYear()</script>
+<script src="/app.js"></script><script src="/trade.js"></script>
+</body></html>

@@ -1,0 +1,54 @@
+<!doctype html><html lang="en"><head><title>TRADEON | Call it or put it in 60 seconds</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css"></head><body>
+<header><div class="wrap"><nav><a class="logo" href="/">TRADEON</a><button class="burger" aria-label="Menu">☰</button><div class="links"><a href="/#how">How it works</a><a href="/#markets">Markets</a><a href="/#features">Why TRADEON</a><a href="/#risk">Risk</a><span id="authLinks" style="display:contents"><a href="/login.html">Log in</a><a href="/register.html" class="btn primary">Create account</a></span></div></nav></div></header>
+<main>
+<div class="wrap hero">
+ <div>
+  <h1>Read the market. Call it or put it. Know in 60 seconds.</h1>
+  <p>Trade binary options on live-style charts. Deposit from $2, withdraw from $5. Fixed stake, fixed payout.</p>
+  <div class="cta"><a class="btn primary lg" href="/register.html">Start trading</a><a class="btn lg" href="/login.html">Log in</a></div>
+  <div class="stats"><div><strong>85%</strong>payout on wins</div><div><strong>30s–5m</strong>expiry times</div><div><strong>$2</strong>minimum deposit</div></div>
+ </div>
+ <div class="panel">
+  <div class="panel-top"><span class="pair">EUR/USD</span><span class="px" id="heroPx">1.08500</span></div>
+  <canvas id="heroChart"></canvas>
+  <div class="mock-btns"><a class="c" href="/register.html">Call ▲</a><a class="p" href="/register.html">Put ▼</a></div>
+ </div>
+</div>
+<div class="ticker"><div class="wrap" id="ticker"><span>Loading prices…</span></div></div>
+
+<section id="how"><div class="wrap">
+ <h2>How a trade works</h2><p class="sub">Every trade is one decision with a known cost and a known payout.</p>
+ <div class="grid">
+  <div class="step"><span>Step 1</span><h3>Pick an asset</h3><p>Choose a currency pair, gold or Bitcoin.</p></div>
+  <div class="step"><span>Step 2</span><h3>Set stake and expiry</h3><p>Decide how much to risk and for how long.</p></div>
+  <div class="step"><span>Step 3</span><h3>Call or Put</h3><p>Call if you expect the price to end higher. Put if lower.</p></div>
+  <div class="step"><span>Step 4</span><h3>Settle at expiry</h3><p>Right call pays 85% profit. Wrong call loses the stake.</p></div>
+ </div>
+</div></section>
+
+<section id="markets" class="alt"><div class="wrap">
+ <h2>Markets you can trade</h2><p class="sub">Five instruments, each with its own live chart.</p>
+ <div class="grid">
+  <div class="card"><h3>Forex</h3><p>EUR/USD, GBP/USD and USD/KES.</p></div>
+  <div class="card"><h3>Crypto</h3><p>BTC/USD with wide, fast moves.</p></div>
+  <div class="card"><h3>Commodities</h3><p>XAU/USD gold, a classic safe-haven asset.</p></div>
+ </div>
+ <div style="margin-top:28px"><a class="btn primary" href="/register.html">Open the trading room</a></div>
+</div></section>
+
+<section id="features"><div class="wrap">
+ <h2>Built for clear, fast trading</h2><p class="sub">Everything you need to place, track and cash out your trades.</p>
+ <div class="grid">
+  <div class="card"><h3>Instant settlement</h3><p>Trades close on time and your balance updates automatically.</p></div>
+  <div class="card"><h3>Trade history</h3><p>Every entry, exit and result is saved to your account.</p></div>
+  <div class="card"><h3>Works on any screen</h3><p>Trade from a phone, tablet or desktop.</p></div>
+  <div class="card"><h3>Secure accounts</h3><p>Passwords are hashed and sessions are protected.</p></div>
+ </div>
+</div></section>
+
+<section id="risk"><div class="wrap"><div class="risk"><h3>Risk warning</h3><p>Binary options are high-risk products. Most traders lose money, and you can lose your whole stake on every trade. They are restricted or banned in several countries. Only trade what you can afford to lose and check the rules where you live.</p></div></div></section>
+
+<section><div class="wrap"><div class="banner"><h2>Ready for your first trade?</h2><p class="sub" style="margin-inline:auto">Create a free account and deposit from just $2.</p><a class="btn primary lg" href="/register.html">Create free account</a></div></div></section>
+</main>
+<footer><div class="wrap"><div class="foot"><a class="logo" href="/">TRADEON</a><div class="fl"><a href="/">Home</a><a href="/login.html">Log in</a><a href="/register.html">Register</a><a href="/#risk">Risk warning</a></div></div><small>&copy; <span id="yr"></span> TRADEON. All rights reserved. Trading binary options carries a high level of risk and may not be suitable for everyone. You can lose your entire stake. Prices on this build come from a simulated feed.</small></div></footer><script>document.getElementById("yr").textContent=new Date().getFullYear()</script><script src="/app.js"></script>
+</body></html>

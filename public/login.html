@@ -1,0 +1,11 @@
+<!doctype html><html lang="en"><head><title>Log in | TRADEON</title><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/style.css"></head><body>
+<header><div class="wrap"><nav><a class="logo" href="/">TRADEON</a><button class="burger" aria-label="Menu">☰</button><div class="links"><a href="/#how">How it works</a><a href="/#markets">Markets</a><a href="/#features">Why TRADEON</a><a href="/#risk">Risk</a><span id="authLinks" style="display:contents"><a href="/login.html">Log in</a><a href="/register.html" class="btn primary">Create account</a></span></div></nav></div></header>
+<main class="auth"><form class="form" id="authForm" data-action="/api/login">
+ <h1>Welcome back</h1><p class="m">Log in to your trading room.</p>
+ <label for="email">Email</label><input id="email" name="email" type="email" autocomplete="email" required>
+ <label for="password">Password</label><input id="password" name="password" type="password" autocomplete="current-password" required>
+ <button class="btn primary" type="submit">Log in</button><div class="msg" id="msg" role="alert"></div>
+ <div class="alt-link">New here? <a href="/register.html">Create an account</a></div>
+</form></main>
+<footer><div class="wrap"><div class="foot"><a class="logo" href="/">TRADEON</a><div class="fl"><a href="/">Home</a><a href="/login.html">Log in</a><a href="/register.html">Register</a><a href="/#risk">Risk warning</a></div></div><small>&copy; <span id="yr"></span> TRADEON. All rights reserved. Trading binary options carries a high level of risk and may not be suitable for everyone. You can lose your entire stake. Prices on this build come from a simulated feed.</small></div></footer><script>document.getElementById("yr").textContent=new Date().getFullYear()</script><script src="/app.js"></script>
+</body></html>
